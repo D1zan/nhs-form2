@@ -43,17 +43,17 @@ public class HoursController {
     private void submitButtonClick(ActionEvent event) throws SQLException {
         Window owner = submitButton.getScene().getWindow();
 
-        System.out.println(memberName.getText());
-        System.out.println(memberGrade.getText());
-        System.out.println(orgaName.getText());
-        System.out.println(orgaContact.getText());
-        System.out.println(service.getText());
-        System.out.println(hourService.getText());
-        System.out.println(dateService.getText());
-        System.out.println(supervisorName.getText());
-        System.out.println(contactInfo.getText());
-        System.out.println(electronicSignature.getText());
-        System.out.println(sigDate.getText());
+        System.out.println("Name: " + memberName.getText());
+        System.out.println("Grade: " + memberGrade.getText());
+        System.out.println("Organization Name: " + orgaName.getText());
+        System.out.println("Organization Contact Information: " + orgaContact.getText());
+        System.out.println("Description of Service: " + service.getText());
+        System.out.println("Total Hours for Service: " + hourService.getText());
+        System.out.println("Date of the Service: " + dateService.getText());
+        System.out.println("Supervisor Name: " + supervisorName.getText());
+        System.out.println("Supervisor Contact Information: " + contactInfo.getText());
+        System.out.println("Electronic Signature: " + electronicSignature.getText());
+        System.out.println("Signature Date: " + sigDate.getText());
 
         if (memberName.getText().isEmpty()) {
            showAlert(owner, "Form Error", "Please enter your name");
