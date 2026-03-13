@@ -9,18 +9,16 @@ public class JdbcDao {
     private static final String INSERT_QUERY_Member  = "INSERT INTO member (member_name,member_grade) VALUES (?,?)";
     private static final String INSERT_QUERY_Hours = "INSERT INTO hours (total_hours, hour_date) VALUES (?,?)";
     private static final String INSERT_QUERY_Organization = "INSERT INTO organization (orga_name, orga_contact) VALUES (?,?) ";
-    private static final String INSERT_QUERY_Supervisor = "INSERT INTO supervisor "
+    private static final String INSERT_QUERY_Supervisor = "INSERT INTO supervisor (super_name, super_contact, super_signature) VALUES (?,?)";
 
-    public void insertRecord(String member_name, String member_grade, String orga_name, String orga_contact, String total_hours, String hour_date, String super_name, String super_contact, String super_signature, String sigDate, String signatureDate) throws SQLException {
+    public void insertRecordMember(String member_name, String member_grade) throws SQLException {
         try (Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME,DATABASE_USERNAME);
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Member)) {
             preparedStatement.setString(1,member_name);
             preparedStatement.setString(2,member_grade);
-            preparedStatement.setString(3,orga_name);
-            preparedStatement.setString(4,orga_contact);
-            preparedStatement.setString(5,total_hours);
-            preparedStatement.setString(6,hour_date);
+
+
             preparedStatement.setString(7,super_name);
             preparedStatement.setString(8,super_contact);
             preparedStatement.setString(9,super_signature);
@@ -32,7 +30,39 @@ public class JdbcDao {
             printSQLException(e);
         }
     }
+    public void insertRecordHours(String hour_date, String total_hours) throws SQLException {
+        try(Connection connection = DriverManager
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Hours)) {
+            preparedStatement.setString(5,total_hours);
+            preparedStatement.setString(6,hour_date);
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
 
+    }
+    public void insertRecordOrganization(String orga_name, String orga_contact) throws SQLException {
+        try(Connection connection = DriverManager
+                .getConnection(DATABASE_URL,DATABASE_USERNAME,DATABASE_PASSWORD);
+        PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Organization)) {
+            preparedStatement.setString(3,orga_name);
+            preparedStatement.setString(4,orga_contact);
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+    }
+    public void insertRecordSupervisor(String super_name, String super_contact, String super_signature) throws SQLException {
+        try(Connection connection = DriverManager
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD));
+        PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Supervisor) {
+
+        }
+
+    }
     public void viewRecords() throws SQLException {
         String SELECT_QUERY = ("SELECT * FROM member");
         try (Connection connection = DriverManager
