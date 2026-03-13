@@ -17,13 +17,6 @@ public class JdbcDao {
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Member)) {
             preparedStatement.setString(1,member_name);
             preparedStatement.setString(2,member_grade);
-
-
-            preparedStatement.setString(7,super_name);
-            preparedStatement.setString(8,super_contact);
-            preparedStatement.setString(9,super_signature);
-            preparedStatement.setString(10, sigDate);
-
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -57,11 +50,16 @@ public class JdbcDao {
     }
     public void insertRecordSupervisor(String super_name, String super_contact, String super_signature) throws SQLException {
         try(Connection connection = DriverManager
-                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD));
-        PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Supervisor) {
-
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+        PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Supervisor)) {
+            preparedStatement.setString(7,super_name);
+            preparedStatement.setString(8,super_contact);
+            preparedStatement.setString(9,super_signature);
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            printSQLException(e);
         }
-
     }
     public void viewRecords() throws SQLException {
         String SELECT_QUERY = ("SELECT * FROM member");

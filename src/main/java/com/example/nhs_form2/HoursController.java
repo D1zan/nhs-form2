@@ -102,17 +102,19 @@ public class HoursController {
         String name = (memberName.getText());
         String grade = (memberGrade.getText());
         String organizationName = (orgaName.getText());
-        String deService = (service.getText());
         String organizationContact = (orgaContact.getText());
         String hours = (hourService.getText());
         String date = (dateService.getText());
         String suName = (supervisorName.getText());
         String suContact = (contactInfo.getText());
         String eleSig = (electronicSignature.getText());
-        String signatureDate = (sigDate.getText());
+
 
         com.example.nhs_form2.JdbcDao jdbcDao = new com.example.nhs_form2.JdbcDao();
-        jdbcDao.insertRecord(name, grade, organizationName, deService, organizationContact, hours, date, suName, suContact, eleSig, signatureDate);
+        jdbcDao.insertRecordMember(name, grade);
+        jdbcDao.insertRecordSupervisor(suName, suContact, eleSig);
+        jdbcDao.insertRecordHours(hours, date);
+        jdbcDao.insertRecordOrganization(organizationName, organizationContact);
     }
     @FXML
     public void records(ActionEvent event) throws SQLException {
