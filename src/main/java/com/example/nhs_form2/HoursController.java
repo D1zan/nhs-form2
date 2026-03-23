@@ -56,47 +56,47 @@ public class HoursController {
         System.out.println("Signature Date: " + sigDate.getText());
 
         if (memberName.getText().isEmpty()) {
-           showAlert(owner, "Form Error", "Please enter your name");
+           showAlert(Alert.AlertType.ERROR, owner,"Form Error", "Please enter your name");
            return;
         }
         if (memberGrade.getText().isEmpty()) {
-            showAlert(owner, "Form Error", "Please enter your grade");
+            showAlert(Alert.AlertType.ERROR, owner,"Form Error", "Please enter your grade");
             return;
         }
         if (orgaName.getText().isEmpty()) {
-            showAlert(owner, "Form Error", "Please enter the name of your organization");
+            showAlert(Alert.AlertType.ERROR, owner,"Form Error", "Please enter the name of your organization");
             return;
         }
         if (service.getText().isEmpty()) {
-            showAlert(owner, "Form Error", "Please enter the service completed");
+            showAlert(Alert.AlertType.ERROR, owner,"Form Error", "Please enter the service completed");
             return;
         }
         if (orgaContact.getText().isEmpty()) {
-            showAlert(owner, "Form Error", "Please enter the organization contact information");
+            showAlert(Alert.AlertType.ERROR, owner, "Form Error", "Please enter the organization contact information");
             return;
         }
         if (hourService.getText().isEmpty()) {
-            showAlert(owner, "Form Error", "Please enter how many of service you did");
+            showAlert(Alert.AlertType.ERROR, owner,"Form Error", "Please enter how many of service you did");
             return;
         }
         if (dateService.getText().isEmpty()) {
-            showAlert(owner, "Form Error", "Please enter the date of service ");
+            showAlert(Alert.AlertType.ERROR, owner, "Form Error", "Please enter the date of service ");
             return;
         }
         if (supervisorName.getText().isEmpty()) {
-            showAlert(owner, "Form Error", "Please enter the name of the supervisor");
+            showAlert(Alert.AlertType.ERROR, owner, "Form Error",  "Please enter the name of the supervisor");
             return;
         }
         if (contactInfo.getText().isEmpty()) {
-            showAlert(owner, "Form Error", "Please enter the supervisor's contact information");
+            showAlert(Alert.AlertType.ERROR, owner, "Form Error", "Please enter the supervisor's contact information");
             return;
         }
         if (electronicSignature.getText().isEmpty()) {
-            showAlert(owner, "Form Error", "Please make sure you have a signature");
+            showAlert(Alert.AlertType.ERROR, owner,"Form Error", "Please make sure you have a signature");
             return;
         }
         if (sigDate.getText().isEmpty()) {
-            showAlert(owner, "Form Error", "Please enter the date your supervisor signed");
+            showAlert(Alert.AlertType.ERROR, owner, "Form Error", "Please enter the date your supervisor signed");
             return;
         }
         String name = (memberName.getText());
@@ -121,8 +121,8 @@ public class HoursController {
         com.example.nhs_form2.JdbcDao jdbcDao = new com.example.nhs_form2.JdbcDao();
         jdbcDao.viewRecords();
     }
-    private static void showAlert(Window owner, String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    private static void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

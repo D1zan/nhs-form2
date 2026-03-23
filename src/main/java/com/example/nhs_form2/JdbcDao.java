@@ -9,7 +9,7 @@ public class JdbcDao {
     private static final String INSERT_QUERY_Member  = "INSERT INTO member (member_name,member_grade) VALUES (?,?)";
     private static final String INSERT_QUERY_Hours = "INSERT INTO hours (total_hours, hour_date) VALUES (?,?)";
     private static final String INSERT_QUERY_Organization = "INSERT INTO organization (orga_name, orga_contact) VALUES (?,?) ";
-    private static final String INSERT_QUERY_Supervisor = "INSERT INTO supervisor (super_name, super_contact, super_signature) VALUES (?,?)";
+    private static final String INSERT_QUERY_Supervisor = "INSERT INTO supervisor (super_name, super_contact, super_signature) VALUES (?,?,?)";
 
     public void insertRecordMember(String member_name, String member_grade) throws SQLException {
         try (Connection connection = DriverManager
@@ -27,8 +27,8 @@ public class JdbcDao {
         try(Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Hours)) {
-            preparedStatement.setString(5,total_hours);
-            preparedStatement.setString(6,hour_date);
+            preparedStatement.setString(1,total_hours);
+            preparedStatement.setString(2,hour_date);
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -40,8 +40,8 @@ public class JdbcDao {
         try(Connection connection = DriverManager
                 .getConnection(DATABASE_URL,DATABASE_USERNAME,DATABASE_PASSWORD);
         PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Organization)) {
-            preparedStatement.setString(3,orga_name);
-            preparedStatement.setString(4,orga_contact);
+            preparedStatement.setString(1,orga_name);
+            preparedStatement.setString(2,orga_contact);
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -52,9 +52,9 @@ public class JdbcDao {
         try(Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
         PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Supervisor)) {
-            preparedStatement.setString(7,super_name);
-            preparedStatement.setString(8,super_contact);
-            preparedStatement.setString(9,super_signature);
+            preparedStatement.setString(1,super_name);
+            preparedStatement.setString(2,super_contact);
+            preparedStatement.setString(3,super_signature);
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
