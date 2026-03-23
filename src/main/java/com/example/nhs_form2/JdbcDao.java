@@ -15,8 +15,8 @@ public class JdbcDao {
         try (Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME,DATABASE_USERNAME);
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Member)) {
-            preparedStatement.setString(1,member_name);
-            preparedStatement.setString(2,member_grade);
+            preparedStatement.setString(1,"name");
+            preparedStatement.setString(2,"2008-03-03");
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -27,8 +27,8 @@ public class JdbcDao {
         try(Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Hours)) {
-            preparedStatement.setString(1,total_hours);
-            preparedStatement.setString(2,hour_date);
+            preparedStatement.setString(1,"10");
+            preparedStatement.setString(2,"2008-03-03");
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -40,8 +40,8 @@ public class JdbcDao {
         try(Connection connection = DriverManager
                 .getConnection(DATABASE_URL,DATABASE_USERNAME,DATABASE_PASSWORD);
         PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Organization)) {
-            preparedStatement.setString(1,orga_name);
-            preparedStatement.setString(2,orga_contact);
+            preparedStatement.setString(1,"name");
+            preparedStatement.setString(2,"0000000000");
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -52,9 +52,9 @@ public class JdbcDao {
         try(Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
         PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY_Supervisor)) {
-            preparedStatement.setString(1,super_name);
-            preparedStatement.setString(2,super_contact);
-            preparedStatement.setString(3,super_signature);
+            preparedStatement.setString(1,"name");
+            preparedStatement.setString(2,"0000000000");
+            preparedStatement.setString(3,"signature");
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
