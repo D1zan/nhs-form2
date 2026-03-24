@@ -62,7 +62,10 @@ public class JdbcDao {
         }
     }
     public void viewRecords() throws SQLException {
-        String SELECT_QUERY = ("SELECT * FROM member, organization, supervisor, hours ");
+        String SELECT_QUERY = ("SELECT * FROM member, organization, supervisor, hours " +
+                "WHERE member.member_name = hours.member_name " +
+                "AND organization.orga_name = hours.orga_name " +
+                "AND supervisor.super_name = hours.super_name");
         try (Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
              Statement statement = connection.createStatement();
@@ -92,6 +95,10 @@ public class JdbcDao {
                         .append("|Supervisor-Contact: ").append(superContact)
                         .append("|Supervisor-Signature: ").append(superSignature)
                         .append("\n");
+            }
+
+            if (allRecords.isEmpty()) {
+                allRecords.append("NO RECORDS DUMBO");
             }
             Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
             infoAlert.setTitle("Records");
