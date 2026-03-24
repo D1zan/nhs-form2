@@ -62,7 +62,7 @@ public class JdbcDao {
         }
     }
     public void viewRecords() throws SQLException {
-        String SELECT_QUERY = ("SELECT * FROM member");
+        String SELECT_QUERY = ("SELECT * FROM member, organization, supervisor, hours ");
         try (Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
              Statement statement = connection.createStatement();
