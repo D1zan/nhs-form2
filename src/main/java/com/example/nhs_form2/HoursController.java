@@ -60,7 +60,7 @@ public class HoursController {
            return;
         }
         if (memberGrade.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, owner,"Form Error", "Please enter your grade");
+            showAlert(Alert.AlertType.ERROR, owner,"Form Error", "Please enter the correct grade");
             return;
         }
         if (orgaName.getText().isEmpty()) {
@@ -99,12 +99,16 @@ public class HoursController {
             showAlert(Alert.AlertType.ERROR, owner, "Form Error", "Please enter the date your supervisor signed");
             return;
         }
+
+
+
+
         String name = (memberName.getText());
-        String grade = (memberGrade.getText());
+        int grade = Integer.parseInt(memberGrade.getText());
         String organizationName = (orgaName.getText());
         String organizationContact = (orgaContact.getText());
         String hours = (hourService.getText());
-        String date = (dateService.getText());
+        Date date = Date.valueOf((dateService.getText()));
         String suName = (supervisorName.getText());
         String suContact = (contactInfo.getText());
         String eleSig = (electronicSignature.getText());
