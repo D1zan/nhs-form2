@@ -62,10 +62,7 @@ public class JdbcDao {
         }
     }
     public void viewRecords() throws SQLException {
-        String SELECT_QUERY = ("SELECT * FROM member, organization, supervisor, hours " +
-                "WHERE member.member_name = hours.member_name " +
-                "AND organization.orga_name = hours.orga_name " +
-                "AND supervisor.super_name = hours.super_name");
+        String SELECT_QUERY = ("SELECT * FROM member");
         try (Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
              Statement statement = connection.createStatement();
@@ -76,24 +73,10 @@ public class JdbcDao {
                 long id = resultSet.getLong("id");
                 String name = resultSet.getString("member_name");
                 String grade = resultSet.getString("member_grade");
-                String orgaName = resultSet.getString("orga_name");
-                String orgaContact = resultSet.getString("orga_contact");
-                String hours = resultSet.getString("total_hours");
-                String date = resultSet.getString("hour_date");
-                String superName = resultSet.getString("super_name");
-                String superContact = resultSet.getString("super_contact");
-                String superSignature = resultSet.getString("super_signature");
 
 
                 allRecords.append("Name: ").append(name)
                         .append("|Grade: ").append(grade)
-                        .append("|Organization: ").append(orgaName)
-                        .append("|Contact: ").append(orgaContact)
-                        .append("|Completed-Hours: ").append(hours)
-                        .append("|Date: ").append(date)
-                        .append("|Supervisor-Name: ").append(superName)
-                        .append("|Supervisor-Contact: ").append(superContact)
-                        .append("|Supervisor-Signature: ").append(superSignature)
                         .append("\n");
             }
 
