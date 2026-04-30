@@ -62,7 +62,50 @@ public class JdbcDao {
         }
     }
     public void viewRecords() throws SQLException {
-        String SELECT_QUERY = ("SELECT * FROM member");
+
+        String SELECT_QUERY_MEMBER = ("SELECT * FROM member");
+        try (Connection connection = DriverManager
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(SELECT_QUERY_MEMBER)) {
+            StringBuilder memberRecords = new StringBuilder();
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String name = resultSet.getString("member_name");
+                String grade = resultSet.getString("member_grade");
+
+                memberRecords.append("Name: ").append(name)
+                        .append("|Grade: ").append(grade);
+
+        }
+        String SELECT_QUERY_ORGANIZATION = ("SELECT * FROM organization");
+        try (Connection connection = DriverManager
+                .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(SELECT_QUERY_ORGANIZATION)) {
+
+            StringBuilder orgaRecord = new StringBuilder();
+            String orgaName = resultSet.getString("orga_name");
+            String orgaContact = resultSet.getString("orga_contact");
+            orgaRecord.append("|Organization: ").append(orgaName)
+                    .append("|Contact: ").append(orgaContact);
+        }
+        String SELECT_QUERY_SUPERVISOR = ("SELECT * FROM supervisor");
+        try (Connection connection = DriverManager
+                    .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+                 Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(SELECT_QUERY_SUPERVISOR)) {
+
+                StringBuilder superRecord = new StringBuilder();
+                String superName = resultSet.getString("super_name");
+                String superContact = resultSet.getString("super_contact");
+                String superSignature = resultSet.getString("super_signature");
+                superRecord.append("|Supervisor-Name: ").append(superName)
+                        .append("|Supervisor-Contact: ").append(superContact)
+                        .append("|Supervisor-Signature: ").append(superSignature);
+        }
+
+                String SELECT_QUERY = ("SELECT * FROM member, organization, supervisor, hours ");
         try (Connection connection = DriverManager
                 .getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
              Statement statement = connection.createStatement();
@@ -73,10 +116,24 @@ public class JdbcDao {
                 long id = resultSet.getLong("id");
                 String name = resultSet.getString("member_name");
                 String grade = resultSet.getString("member_grade");
+                String orgaName = resultSet.getString("orga_name");
+                String orgaContact = resultSet.getString("orga_contact");
+                String hours = resultSet.getString("total_hours");
+                String date = resultSet.getString("hour_date");
+                String superName = resultSet.getString("super_name");
+                String superContact = resultSet.getString("super_contact");
+                String superSignature = resultSet.getString("super_signature");
 
 
                 allRecords.append("Name: ").append(name)
                         .append("|Grade: ").append(grade)
+                        .append("|Organization: ").append(orgaName)
+                        .append("|Contact: ").append(orgaContact)
+                        .append("|Completed-Hours: ").append(hours)
+                        .append("|Date: ").append(date)
+                        .append("|Supervisor-Name: ").append(superName)
+                        .append("|Supervisor-Contact: ").append(superContact)
+                        .append("|Supervisor-Signature: ").append(superSignature)
                         .append("\n");
             }
 
