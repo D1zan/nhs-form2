@@ -76,7 +76,7 @@ public class HoursController {
             return;
         }
         if (hourService.getText().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, owner,"Form Error", "Please enter how many of service you did");
+            showAlert(Alert.AlertType.ERROR, owner,"Form Error", "Please enter how many hours of service you did");
             return;
         }
         if (dateService.getText().isEmpty()) {
